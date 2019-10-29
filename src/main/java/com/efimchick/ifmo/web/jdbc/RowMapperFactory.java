@@ -15,15 +15,15 @@ public class RowMapperFactory {
         return resultSet -> {
             try{
                 return new Employee(
-                        new BigInteger(resultSet.getString("ID")),
+                        new BigInteger(String.valueOf(resultSet.getInt("ID")) ),
                         new FullName(
+                                resultSet.getString("FIRSTNAME"),
                                 resultSet.getString("LASTNAME"),
-                                resultSet.getString("LASTNAME"),
-                                resultSet.getString("LASTNAME")
+                                resultSet.getString("MIDDLENAME")
                         ),
                         Position.valueOf(resultSet.getString("POSITION")),
                         LocalDate.parse(resultSet.getString("HIREDATE")),
-                        new BigDecimal(resultSet.getString("SALARY"))
+                        new BigDecimal(resultSet.getDouble("SALARY"))
                 );
             }catch (SQLException e){
                 return null;
