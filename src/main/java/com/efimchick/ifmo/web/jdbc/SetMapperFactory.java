@@ -16,9 +16,7 @@ import com.efimchick.ifmo.web.jdbc.domain.Position;
 public class SetMapperFactory {
 
     public SetMapper<Set<Employee>> employeesSetMapper() {
-        return new SetMapper<Set<Employee>>() {
-            @Override
-            public Set<Employee> mapSet(ResultSet resultSet)  {
+        return resultSet -> {
                 try{
                     resultSet.first();
                     LinkedHashSet<Employee> neededSet = new LinkedHashSet<>();
@@ -41,8 +39,7 @@ public class SetMapperFactory {
                             null));
                     return neededSet;
                 }
-            }
-        };
+            };
     }
     private Employee getEmployee(ResultSet resultSet) throws SQLException{
         int thisRow = resultSet.getRow();
