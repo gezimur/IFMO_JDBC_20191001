@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ServiceFactory {
-    private HashMap<Integer, Department> departments = getDepartments();
     private Employee president = new Employee(
             new BigInteger(String.valueOf(7839)),
             new FullName(
@@ -270,8 +269,14 @@ public class ServiceFactory {
         );
     }
     private Department getDepartment(int departmentId){
-        return departments.get(departmentId);
+        HashMap<Integer, Department> departments = getDepartments();
+        if (departments != null){
+            return departments.get(departmentId);
+        }else{
+            return null;
+        }
     }
+
     private  List<Employee> getNeededList(Paging paging, List<Employee> list){
         int left = (paging.page - 1) * paging.itemPerPage;
         int right = left + paging.itemPerPage;
